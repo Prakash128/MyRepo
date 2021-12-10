@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- cfg DataSource -->
+<bean id="hkds" class="com.zaxxer.hikari.HikariDataSource">
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+<property name="username" value="system"/>
+<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+<property name="password" value="password"/>
+
+</bean>
+<!-- cfg JdbcTemplete -->
+<bean id="templete" class="org.springframework.jdbc.core.JdbcTemplate">
+<constructor-arg name="dataSource" ref="hkds"/>
+</bean>
+<!-- cfg Empl class -->
+<bean id="empDao" class="com.nt.dao.EmployeeDAOImpl">
+<constructor-arg name="jt" ref="templete"></constructor-arg>
+</bean>
+
+
+</beans>
